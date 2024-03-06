@@ -1,5 +1,6 @@
 package com.example.socialTimeline
 
+import com.example.schema.generated.types.Show
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
 import com.netflix.graphql.dgs.InputArgument
@@ -16,11 +17,9 @@ class ShowsDataFetcher {
     @DgsQuery
     fun shows(@InputArgument titleFilter : String?): List<Show> {
         return if(titleFilter != null) {
-            shows.filter { it.title.contains(titleFilter) }
+            shows.filter { it.title?.contains(titleFilter) ?: false }
         } else {
             shows
         }
     }
-
-    data class Show(val title: String, val releaseYear: Int)
 }
