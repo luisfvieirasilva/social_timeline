@@ -1,25 +1,23 @@
 package com.example.socialTimeline
 
-import com.example.schema.generated.types.Show
+import com.example.schema.generated.types.User
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsQuery
 import com.netflix.graphql.dgs.InputArgument
 
 @DgsComponent
 class ShowsDataFetcher {
-    private val shows = listOf(
-            Show("Stranger Things", 2016),
-            Show("Ozark", 2017),
-            Show("The Crown", 2016),
-            Show("Dead to Me", 2019),
-            Show("Orange is the New Black", 2013))
+    private val users = listOf(
+        User("user1", "User1"),
+        User("user2", "User2"),)
 
     @DgsQuery
-    fun shows(@InputArgument titleFilter : String?): List<Show> {
-        return if(titleFilter != null) {
-            shows.filter { it.title?.contains(titleFilter) ?: false }
-        } else {
-            shows
-        }
+    fun users(): List<User> {
+        return users
+    }
+
+    @DgsQuery
+    fun user(@InputArgument username : String): User? {
+        return users.find {user -> user.username == username}
     }
 }
