@@ -1,3 +1,5 @@
+scalar DateTime @specifiedBy(url:"https://scalars.graphql.org/andimarek/date-time.html")
+
 type Query {
     users: [User]
     user(username: String!): User
@@ -6,4 +8,5 @@ type Query {
 type User {
     username: String!
     name: String!
+    createdAt: DateTime!
 }
