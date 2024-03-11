@@ -6,6 +6,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.22'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.9.22'
     id 'com.netflix.dgs.codegen' version '6.1.5'
+    id 'application'
 }
 
 group = 'com.example'
@@ -53,4 +54,8 @@ tasks.withType(KotlinCompile) {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+application {
+    mainClass = 'com.example.socialTimeline.SocialTimelineApplicationKt'
 }
