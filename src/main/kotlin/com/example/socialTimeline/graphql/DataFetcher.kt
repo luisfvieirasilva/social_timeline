@@ -2,7 +2,7 @@ package com.example.socialTimeline.graphql
 
 import com.example.schema.generated.types.User
 import com.example.schema.generated.types.UserInput
-import com.example.socialTimeline.entities.UserEntity
+import com.example.socialTimeline.db.entities.UserEntity
 import com.example.socialTimeline.services.UserService
 import com.netflix.graphql.dgs.DgsComponent
 import com.netflix.graphql.dgs.DgsMutation

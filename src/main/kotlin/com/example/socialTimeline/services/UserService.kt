@@ -1,7 +1,7 @@
 package com.example.socialTimeline.services
 
-import com.example.socialTimeline.entities.UserEntity
-import com.example.socialTimeline.repositories.UserRepository
+import com.example.socialTimeline.db.entities.UserEntity
+import com.example.socialTimeline.db.repositories.UserRepository
 import org.springframework.stereotype.Service
 
 interface UserService {

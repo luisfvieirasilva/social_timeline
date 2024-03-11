@@ -1,4 +1,4 @@
-package com.example.socialTimeline.entities
+package com.example.socialTimeline.db.entities
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.neo4j.core.schema.GeneratedValue
