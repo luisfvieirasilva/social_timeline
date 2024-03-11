@@ -1,55 +1,56 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id 'org.springframework.boot' version '3.2.3'
-	id 'io.spring.dependency-management' version '1.1.4'
-	id 'org.jetbrains.kotlin.jvm' version '1.9.22'
-	id 'org.jetbrains.kotlin.plugin.spring' version '1.9.22'
-	id 'com.netflix.dgs.codegen' version '6.1.5'
+    id 'org.springframework.boot' version '3.2.3'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'org.jetbrains.kotlin.plugin.spring' version '1.9.22'
+    id 'com.netflix.dgs.codegen' version '6.1.5'
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencyManagement {
-	imports {
-		mavenBom('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release')
-	}
+    imports {
+        mavenBom('com.netflix.graphql.dgs:graphql-dgs-platform-dependencies:latest.release')
+    }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-	implementation 'org.jetbrains.kotlin:kotlin-reflect'
-	implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
-	implementation 'com.netflix.graphql.dgs:graphql-dgs-extended-scalars'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-neo4j'
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'com.netflix.graphql.dgs:graphql-dgs-spring-boot-starter'
+    implementation 'com.netflix.graphql.dgs:graphql-dgs-extended-scalars'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-generateJava{
-	schemaPaths = ["${projectDir}/src/main/resources/schema"]
-	packageName = 'com.example.schema.generated'
-	generateClient = true
-	typeMapping = [
-			"DateTime" : "java.time.OffsetDateTime",
-	]
+generateJava {
+    schemaPaths = ["${projectDir}/src/main/resources/schema"]
+    packageName = 'com.example.schema.generated'
+    generateClient = true
+    typeMapping = [
+            "DateTime": "java.time.OffsetDateTime",
+    ]
 }
 
 tasks.withType(KotlinCompile) {
-	kotlinOptions {
-		freeCompilerArgs += '-Xjsr305=strict'
-		jvmTarget = '17'
-	}
+    kotlinOptions {
+        freeCompilerArgs += '-Xjsr305=strict'
+        jvmTarget = '17'
+    }
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
