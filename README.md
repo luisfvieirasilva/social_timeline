@@ -11,10 +11,16 @@ To run this project go to its root directory and them execute the following step
 
 1. Start docker containers
     - `docker-compose up`
-2. Start web server
+    - Go to http://127.0.0.1:7474/browser/ to check if it's up
+2. If this is the first time you're running the project. Configure your database
+    - `./scripts/configure_db.sh`
+3. Start web server
     - `./gradlew run`
 
 ## Needed improvements
 
+- Create .env/config.yml file to keep all configurations (e.g: Neo4J username and password)
 - Spring Neo4J Data doesn't work with OffsetDateTime but with LocalDateTime. So we're storing date time without
-  timezones for now 
+  timezones for now
+- Improve Neo4J error handling. Return custom error type
+- Use [liquigraph](https://www.liquigraph.org/) to create Neo4J constrains
