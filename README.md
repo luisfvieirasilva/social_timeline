@@ -13,3 +13,8 @@ To run this project go to its root directory and them execute the following step
     - `docker-compose up`
 2. Start web server
     - `./gradlew run`
+
+## Needed improvements
+
+- Spring Neo4J Data doesn't work with OffsetDateTime but with LocalDateTime. So we're storing date time without
+  timezones for now 

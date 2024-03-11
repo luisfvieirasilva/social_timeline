@@ -5,13 +5,13 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue
 import org.springframework.data.neo4j.core.schema.Id
 import org.springframework.data.neo4j.core.schema.Node
 import org.springframework.data.neo4j.core.schema.Property
-import java.time.OffsetDateTime
+import java.time.LocalDateTime
 
 @Node("User")
-class UserEntity(
+data class UserEntity(
     @Property("username") val username: String,
     @Property("name") val name: String,
-    @Property("createdAt") @CreatedDate val createdAt: OffsetDateTime,
+    @Property("createdAt") @CreatedDate val createdAt: LocalDateTime? = null,
     @Id @GeneratedValue val id: String? = null
 ) {
 

@@ -5,9 +5,18 @@ type Query {
     user(username: String!): User
 }
 
+type Mutation {
+    createUser(user: UserInput!): User
+}
+
 type User {
     id: String!
     username: String!
     name: String!
     createdAt: DateTime!
+}
+
+input UserInput {
+    username: String!
+    name: String!
 }
