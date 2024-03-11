@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service
 interface UserService {
     fun findAll(): List<UserEntity>
     fun findByUsername(username: String): UserEntity?
-
     fun createUser(username: String, name: String): UserEntity
 }
 

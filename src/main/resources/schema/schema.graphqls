@@ -3,10 +3,12 @@ scalar DateTime @specifiedBy(url:"https://scalars.graphql.org/andimarek/date-tim
 type Query {
     users: [User]
     user(username: String!): User
+    posts(authorUsername: String): [Post]
 }
 
 type Mutation {
     createUser(user: UserInput!): User
+    createPost(post: PostInput!): Post
 }
 
 type User {
@@ -14,9 +16,24 @@ type User {
     username: String!
     name: String!
     createdAt: DateTime!
+    posts: [Post]!
 }
 
 input UserInput {
     username: String!
     name: String!
+}
+
+type Post {
+    id: String!
+    title: String!
+    body: String!
+    createdAt: DateTime!
+    postedBy: User!
+}
+
+input PostInput {
+    title: String!
+    body: String!
+    authorUsername: String!
 }
