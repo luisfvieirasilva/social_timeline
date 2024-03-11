@@ -24,3 +24,4 @@ To run this project go to its root directory and them execute the following step
   timezones for now
 - Improve Neo4J error handling. Return custom error type
 - Use [liquigraph](https://www.liquigraph.org/) to create Neo4J constrains
+- Use @Async at Neo4J repositories

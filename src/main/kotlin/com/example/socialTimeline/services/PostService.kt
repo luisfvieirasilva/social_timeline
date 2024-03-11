@@ -18,7 +18,7 @@ class PostServiceImpl(val postRepository: PostRepository, val userService: UserS
             return postRepository.findAll().toList()
         }
 
-        return postRepository.findByAuthorUsername(authorUsername)
+        return postRepository.findByAuthorUsername(listOf(authorUsername))
     }
 
     override fun createPost(title: String, body: String, authorUsername: String): PostEntity {
