@@ -1,11 +1,9 @@
 package com.example.socialTimeline.graphql
 
 import com.example.schema.generated.DgsConstants
-import com.example.schema.generated.types.Post
-import com.example.schema.generated.types.PostInput
-import com.example.schema.generated.types.User
-import com.example.schema.generated.types.UserInput
+import com.example.schema.generated.types.*
 import com.example.socialTimeline.converters.toDTO
+import com.example.socialTimeline.converters.toEntity
 import com.example.socialTimeline.graphql.dataloaders.UserPostsDataLoader
 import com.example.socialTimeline.services.PostService
 import com.example.socialTimeline.services.UserService
@@ -14,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import java.util.concurrent.CompletableFuture
 
 @DgsComponent
-class UserFetcher(val userService: UserService, val postService: PostService) {
+class UserFetcher(val userService: UserService) {
 
     @DgsQuery
     fun users(): List<User> {
@@ -56,5 +54,11 @@ class PostFetcher {
     @DgsMutation
     fun createPost(@InputArgument post: PostInput): Post {
         return postService.createPost(post.title, post.body, post.authorUsername).toDTO()
+    }
+
+    @DgsMutation
+    fun reactToPost(@InputArgument input: ReactToPostInput): UserReactionToPost {
+        val (reaction, post) = postService.reactToPost(input.username, input.postId, input.reaction.toEntity())
+        return reaction.toDTO(post.toDTO())
     }
 }

@@ -9,6 +9,7 @@ type Query {
 type Mutation {
     createUser(user: UserInput!): User
     createPost(post: PostInput!): Post
+    reactToPost(input: ReactToPostInput!): UserReactionToPost!
 }
 
 type User {
@@ -17,6 +18,8 @@ type User {
     name: String!
     createdAt: DateTime!
     posts: [Post]!
+    #    TODO: Implement
+    #    reactedTo: [UserReactionToPost!]!
 }
 
 input UserInput {
@@ -30,10 +33,28 @@ type Post {
     body: String!
     createdAt: DateTime!
     postedBy: User!
+    reactedBy: [UserReactionToPost!]!
+}
+
+type UserReactionToPost {
+    user: User!
+    post: Post!
+    reaction: PostReactionType!
 }
 
 input PostInput {
     title: String!
     body: String!
     authorUsername: String!
+}
+
+input ReactToPostInput {
+    username: String!
+    postId: String!
+    reaction: PostReactionType!
+}
+
+enum PostReactionType {
+    LIKED
+    UNLIKED
 }

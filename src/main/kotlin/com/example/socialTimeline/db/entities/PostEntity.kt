@@ -9,6 +9,10 @@ data class PostEntity(
     @Property("title") val title: String,
     @Property("body") val body: String,
     @Relationship("POSTED", direction = Relationship.Direction.INCOMING) val postedBy: UserEntity,
+    @Relationship(
+        "REACTED",
+        direction = Relationship.Direction.INCOMING
+    ) val reactedBy: Set<UserReactionRelationship> = emptySet(),
     @Property("createdAt") @CreatedDate val createdAt: LocalDateTime? = null,
     @Id @GeneratedValue val id: String? = null
 ) {
@@ -18,6 +22,6 @@ data class PostEntity(
             return this;
         }
 
-        return PostEntity(this.title, this.body, this.postedBy, this.createdAt, id)
+        return this.copy(id = id)
     }
 }

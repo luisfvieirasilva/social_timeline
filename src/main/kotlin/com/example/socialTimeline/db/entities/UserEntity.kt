@@ -14,12 +14,10 @@ data class UserEntity(
     @Property("createdAt") @CreatedDate val createdAt: LocalDateTime? = null,
     @Id @GeneratedValue val id: String? = null
 ) {
-
     fun withId(id: String): UserEntity {
         if (this.id === id) {
             return this;
         }
-
-        return UserEntity(this.username, this.name, this.createdAt, id)
+        return this.copy(id = id)
     }
 }
