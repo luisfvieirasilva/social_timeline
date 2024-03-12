@@ -7,13 +7,20 @@ import org.springframework.data.neo4j.core.schema.Node
 import org.springframework.data.neo4j.core.schema.Property
 import java.time.LocalDateTime
 
-@Node("User")
+@Node(UserEntity.N_USER)
 data class UserEntity(
-    @Property("username") val username: String,
-    @Property("name") val name: String,
-    @Property("createdAt") @CreatedDate val createdAt: LocalDateTime? = null,
+    @Property(P_USERNAME) val username: String,
+    @Property(P_NAME) val name: String,
+    @Property(P_CREATED_AT) @CreatedDate val createdAt: LocalDateTime? = null,
     @Id @GeneratedValue val id: String? = null
 ) {
+    companion object {
+        const val N_USER = "User"
+        const val P_USERNAME = "username"
+        const val P_NAME = "name"
+        const val P_CREATED_AT = "createdAt"
+    }
+
     fun withId(id: String): UserEntity {
         if (this.id === id) {
             return this;

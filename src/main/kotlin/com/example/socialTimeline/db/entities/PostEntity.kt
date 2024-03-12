@@ -4,18 +4,26 @@ import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.neo4j.core.schema.*
 import java.time.LocalDateTime
 
-@Node("Post")
+@Node(PostEntity.N_POST)
 data class PostEntity(
-    @Property("title") val title: String,
-    @Property("body") val body: String,
-    @Relationship("POSTED", direction = Relationship.Direction.INCOMING) val postedBy: UserEntity,
+    @Property(P_TITLE) val title: String,
+    @Property(P_BODY) val body: String,
+    @Relationship(R_POSTED, direction = Relationship.Direction.INCOMING) val postedBy: UserEntity,
     @Relationship(
-        "REACTED",
+        R_REACTED,
         direction = Relationship.Direction.INCOMING
     ) val reactedBy: Set<UserReactionRelationship> = emptySet(),
-    @Property("createdAt") @CreatedDate val createdAt: LocalDateTime? = null,
+    @Property(P_CREATED_AT) @CreatedDate val createdAt: LocalDateTime? = null,
     @Id @GeneratedValue val id: String? = null
 ) {
+    companion object {
+        const val N_POST = "Post"
+        const val P_TITLE = "title"
+        const val P_BODY = "body"
+        const val P_CREATED_AT = "createdAt"
+        const val R_POSTED = "POSTED"
+        const val R_REACTED = "REACTED"
+    }
 
     fun withId(id: String): PostEntity {
         if (this.id === id) {
